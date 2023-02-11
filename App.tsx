@@ -1,8 +1,17 @@
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { Alert, Button, KeyboardAvoidingView, StyleSheet, Text, TextInput, View } from 'react-native';
+import {
+  Alert, Button, KeyboardAvoidingView, StyleSheet,
+  Text, TextInput, View
+} from 'react-native';
 import Greeting from './src/components/Greeting';
 import PhotoImg from './src/components/PhotoImg';
+import MainScreen from './src/screens/MainScreen';
+import SubScreen from './src/screens/SubScreen';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [count, setCount] = useState(0)
@@ -12,8 +21,6 @@ export default function App() {
       setCount(count + 1)
     }
   
-
-
   const _handleTextChange = ( inputValue: any)  => {
     setTest( inputValue );
   };
@@ -21,9 +28,18 @@ export default function App() {
   const pushtext = () => {
     setOntext(test);
   }
+
   return (
     
     <View style={styles.container}>
+
+      <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Main" component={MainScreen} />
+        <Stack.Screen name="Sub" component={SubScreen} />
+      </Stack.Navigator>
+      </NavigationContainer>
+      
       <Text style={styles.textStyle}>akaaaaaan</Text>
       <Button
         title="Press me"
